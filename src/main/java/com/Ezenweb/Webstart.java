@@ -14,6 +14,9 @@ public class Webstart {
         // 스프링 어플리케이션 실행[현재클래스명.class]
 
     }
+
+
+
 }
 
 
@@ -22,5 +25,9 @@ public class Webstart {
     2. @ 어노테이션
         1. 내장 : @override : 상속 메소드 재정의할때
         2. 메타 :
+
+                컴포넌트 스캔 빈[스프링 메모리]등록
+                        1.@Controller
+                        2.@RestController
 
 */
