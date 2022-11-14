@@ -1,5 +1,6 @@
 package com.Ezenweb.domain.dto;
 
+import com.Ezenweb.domain.entity.MemberEntity;
 import lombok.*;
 
 @NoArgsConstructor // 빈생성자 주입
@@ -12,10 +13,17 @@ import lombok.*;
 
 public class MemberDto {
 
-    private  String name;
-    private  String email;
-    private  String organization;
+    private  int mno;
+    private  String memail;
+    private  String mpassword;
 
-
+    //* dto --> entity 변환
+    public MemberEntity toEntity(){
+        return MemberEntity.builder()
+                .mno(this.mno)
+                .memail(this.memail)
+                .mpassword(this.mpassword)
+                .build();
+    }
 
 }
