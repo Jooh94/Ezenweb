@@ -5,12 +5,18 @@ import com.Ezenweb.domain.dto.MemberDto;
 import com.Ezenweb.domain.entity.MemberEntity;
 import com.Ezenweb.domain.entity.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service // 해당 클래스가 Service 임을 명시
 public class MemberService {
@@ -20,6 +26,8 @@ public class MemberService {
     private MemberRepository memberRepository; //리포지토리객체
     @Autowired // 스프링 컨테이너 [ 메모리 ]
     private HttpServletRequest request; //요청 객체
+    @Autowired
+    private JavaMailSender javaMailSender; //메일 전송 객체
 
 
     ////////////////////////////////////////서비스 메소드/////////////////////////////////
@@ -130,4 +138,55 @@ public class MemberService {
         request.getSession().setAttribute("loginMno", null);
     }
 
+    public List<MemberDto>list(){
+
+        List<MemberEntity> list= memberRepository.findAll();
+        //2. 엔티티 DTO
+        List<MemberDto> dtoList = new ArrayList<>();
+        for( MemberEntity entity : list){
+            dtoList.add(entity.toDto()); // 형변환
+
+        }
+        return dtoList;
+    }
+
+    //9 인증코드 발송
+    public String getauth(String toemail){
+        String auth ="";
+        String html ="<html><body><h1> EZENWEB 회원가입 이메일 인증코드 입니다</h1>";
+
+        Random random = new Random(); //1. 난수객체
+        for(int i =0; i<6; i++){      //2. 6회전
+            char randchar =(char) (random.nextInt(26)+97); //97~122
+           //char randchar = random.nextInt(10)+48; //48~57: 0~9
+            auth += randchar;
+        }
+        html +="<div>인증코드 : "+auth+"</div>";
+        html +="</body></html>";
+        meailsend(toemail,"Ezenweb 인증코드",html);
+        return auth; //인증코드 반환
+    }
+    //9 메일 전송 서비스
+
+    public  void meailsend(String toemail , String title , String content){
+       try {
+           MimeMessage message = javaMailSender.createMimeMessage();// 1. Mime프로토콜 객체 생성
+           // 2. Mime 설정
+           MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, "utf-8");
+           mimeMessageHelper.setFrom("wngur094@naver.com", "Ezenweb");//3.보내는 사람 정보
+           mimeMessageHelper.setTo(toemail);//4. 받는 사람
+           mimeMessageHelper.setSubject(title);//5. 메일 제목
+           mimeMessageHelper.setText(content.toString(), true);//6. 메일 내용
+           javaMailSender.send(message); //7. 메일전송
+       }catch (Exception e){System.out.println("메일전송"+e);}
+       }
 }
+/*
+    메일전송
+        1.라이브러리
+    1.라이브러리 implementation 'org.springframework.boot:spring-boot-starter-mail' //스프링 메일 전송 SMTP
+    2.보내는 사람 정보 [ ]
+        네이버기준 : [application.properties]
+
+
+ */

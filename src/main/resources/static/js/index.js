@@ -28,12 +28,31 @@ function getloginMno(){
 function getlogoutMno(){
 
     $.ajax({
-        url: "/member/getlogoutMno",
-        type:"get",
+        url: "/member/getlogoutMno", //요청 url
+        type:"get", // 요청 메소드
         success: function(re){
         alert('로그아웃')
-location.href="/";}
+location.href="/";} // index.html 반환 해주는 매핑 주소 해주면된다
     })
 
     }
 
+// 회원목록
+list()
+function list(){
+    $.ajax({
+    url: "/member/list",
+    type:"get",
+    success: function(list){
+        let html = '<tr><th> 번호 </th> <th>이메일 </th> <th>비밀번호</th></tr>';
+        list.forEach((m)=>{
+            html +=
+            '<tr> <td>'+m.mno+'</td> <td>'+m.memail+'</td> <td>'+m.mpassword+'</td></tr>';
+
+        })
+        document.querySelector(".mtable").innerHTML = html;
+
+    }
+
+    })
+}

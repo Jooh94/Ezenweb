@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController // 해당 클래스가 RestController 임을 명시
 @RequestMapping("/member") // 공통 URL 메핑주소
 public class MemberController {
@@ -60,14 +62,27 @@ public class MemberController {
 
     }
 
-    @GetMapping("/getloginMno")
+    @GetMapping("/getloginMno") // 로그인 정보 확인
     public  int getloginMno(){
         int result = memberService.getloginMno();
         return  result;
 
     }
 
-    @GetMapping("/getlogoutMno")
+    @GetMapping("/getlogoutMno") //7.로그아웃
     public  void getlogoutMno(){memberService.getlogoutMno();}
+
+    @GetMapping("/list") //8 회원목록
+    @ResponseBody
+    public List<MemberDto> list(){
+      List<MemberDto> list = memberService.list();
+        System.out.println("확인"+list);
+      return list;
+    }
+
+    @GetMapping("/getauth")
+    public String getauth(@RequestParam("toemail")String toemail){
+        return memberService.getauth(toemail);
+    }
 
 }

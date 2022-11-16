@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cfd5cd9-5714-4550-8fb4-88f1c3a03da4" name="Changes" comment="11-14">
+    <list default="true" id="6cfd5cd9-5714-4550-8fb4-88f1c3a03da4" name="Changes" comment="11-15">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/domain/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/domain/dto/MemberDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/domain/entity/MemberEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/domain/entity/MemberEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/domain/entity/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/domain/entity/MemberRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/service/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/member/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/member/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/member/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/member/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +133,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668416523178</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="11-14">
+      <created>1668506016345</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668506016345</updated>
+    </task>
+    <task id="LOCAL-00004" summary="11-15">
+      <created>1668506030988</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668506030988</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -145,7 +168,8 @@
     <MESSAGE value="11-10" />
     <MESSAGE value="11-11" />
     <MESSAGE value="11-14" />
-    <option name="LAST_COMMIT_MESSAGE" value="11-14" />
+    <MESSAGE value="11-15" />
+    <option name="LAST_COMMIT_MESSAGE" value="11-15" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

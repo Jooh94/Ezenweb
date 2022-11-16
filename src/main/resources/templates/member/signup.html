@@ -8,9 +8,18 @@
 
     <h3> 회원가입</h3>
 
-    <input type="text" class="memail"><br>
-    <input type="text" class="mpassword"><br>
+
+   이메일 <input type="text" class="memail">
+    <button type="button" onclick="getauth()" class="getauthbtn">인증코드받기</button>
+    <div class="authbox">
+        <input type="text" class="authinput">
+        <button type="button" class="authbtn" onclick="authcode()">인증</button>
+        <span class="timerbox"></span>
+    </div>
+    핸드폰 :<input type="text" class="mphone"><br>
+   비밀번호 <input type="text" class="mpassword"><br>
     <button type="button" onclick="setmember()">가입하기</button>
+
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/js/member/signup.js"></script>
 
