@@ -1,11 +1,14 @@
-package com.Ezenweb.domain.entity;
+package com.Ezenweb.domain.entity.member;
 
 
 import com.Ezenweb.domain.dto.MemberDto;
+import com.Ezenweb.domain.entity.BaseEntity;
+import com.Ezenweb.domain.entity.board.BoardEntity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity // 해당 연결된 DB의 테이블과 매핑[연결]
 @Table(name="member") //db에서 사용될 테이블 이름
@@ -15,13 +18,12 @@ import java.time.LocalDateTime;
 @Setter //필드 들의 get,set 메소드 주입
 @ToString //객체내 필드 정보 확인 TOString 메소드 주입
 @Builder // 객체생성 안전성 보장[매개변수 개수/순서무관]
-public class MemberEntity {
+public class MemberEntity extends BaseEntity {
 
         //1. 필드
         @Id // 엔티티당 무조건 1개이상 [pk]
         @GeneratedValue(strategy = GenerationType.IDENTITY)// 자동번호부여
         private int mno; // 회원번호 필드
-
 
         @Column(nullable = false) //  DB :not null
         private String memail;  // 회원이메일 = 회원아이디 필드
@@ -31,7 +33,9 @@ public class MemberEntity {
         @Column (nullable = false) //  DB :not null
         private String mphone;     // 회원 전화번호 필드
 
-
+        @OneToMany(mappedBy = "memberEntity") // 1:n PK에 해당 어토네이션 mappedBy = "fk필드명"
+        @Builder.Default // 빌더 사용시 해당 필드의 초기값 설정
+        private List<BoardEntity> boardEntityList = new ArrayList<>();
 
         //2.생성자 [ 룸복으로 사용]
         //3.메소드[룸복으로사용]

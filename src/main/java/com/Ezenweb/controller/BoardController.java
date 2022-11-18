@@ -3,60 +3,71 @@ package com.Ezenweb.controller;
 
 import com.Ezenweb.domain.dto.BoardDto;
 import com.Ezenweb.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
-@RestController // 해당 클래스가 컨트롤 목적 사용
+@RestController // 스프링이 이건 컨트롤이다 알아야하니 설정
 @RequestMapping("/board")
 public class BoardController {
 
-    //-----------------------HTMl LOAD URL----------------------------
+    // 컨트롤 역할 : HTTP 요청 / model AND View응답
 
-        //1. 게시물 목록 페이지 열기
-        @GetMapping("/list")
-    public Resource list(){ //import org.springframework.core.io.Resource; 꼭 이거써야함
-            return  new ClassPathResource("templates/board/list.html");
-        }
-        //2. 게시물 쓰기페이지열기
+    // ----------------1.전역변수 -------------------------------//
+   //1. 서비스 메소드 호출 위한 객체 생성 [제어역전]
+    //1. 이건 관리자가 만든거 관리 내가해야한다
+    //개발자가 new 연산자 사용해서 JVM 힙 메모리 할당해서 객체 생성
+    //private  BoardService boardService = new BoardService();
+    //2. boardService 부르기위한 두가지방법 인데 아래꺼쓰면 스프링이 관리한다
+    //2.@AUtowired 어노테이션 이용해서 Spring 컨테이너에 빈 생성
+    @Autowired
+    private BoardService boardService;
+    //----------------2.페이지 로드[html] [view]-----------------------//
 
-        @GetMapping("/write")
-    public  Resource write(){
-            return  new ClassPathResource("templates/board/write.html");
-        }
-        // ---------------------------------------------------------------
-    //1.게시물 글쓰기 처리
-    @PostMapping ("/setboard")
-    @ResponseBody
-    public  boolean setboard(@RequestBody BoardDto boardDto){
-
-        System.out.println(boardDto.toString());
-            //1. DTO 내용확인
-            //2. ------> 서비스[비즈니스 로직]로 이동
-            //3.반환
-       boolean result = new BoardService().setboard(boardDto);
-        return  true;
-            // boolean : Content-Type : application/json
-            // Sting : Content-Type : text/html; charset=UTF-8
-            // Resource: Content-Type: text/html
-
-        }
-    //2.게시물 목록보기 [페이지,검색]
-    @GetMapping("/getboards")
-    @ResponseBody
-    public ArrayList<BoardDto> getboards(){
-            //1.------------>서비스[비즈니스 로직] 로 이동
-            //2. 반환
-       ArrayList<BoardDto> list = new BoardService().getboards();
-        return  list;
+    //1. 게시물페이지 열기
+    @GetMapping("/list")
+    public Resource getlist(){return new ClassPathResource("templates/board/list.html");}
+    //2. 게시물쓰기 페이지열기
+    @GetMapping("/write")
+    public Resource getwrite(){return new ClassPathResource("templates/board/write.html");}
+    //3. 게시물ㅈ회 페이지 열기
+    @GetMapping("/view")
+    public Resource getview(){return  new ClassPathResource("templates/board/view.html");}
+    //4. 게시물수정 페이지 열기
+    @GetMapping("/update")
+    public Resource getupdate(){return new ClassPathResource("templates/board/update.html");}
+    //-----------------3.요청과응답 처리[model]-------------------//
+    // 객체로 받을땐 @RequestBody
+    // 하나씩 받을땐 @RequestParam
+    //1. 게시물 쓰기 [첨부파일]
+    @PostMapping("/setboard")
+    public boolean setboard(@RequestBody BoardDto boardDto){
+        return boardService.setboard(boardDto);
+    }
+    //2. 게시물 목록 조회 [ 페이징 검색]
+    @GetMapping("/boardlist")
+    public List<BoardDto> getboardlist(){
+    return boardService.boardlist();
+    }
+    //3. 게시물 개별 조회
+    @GetMapping("/getboard")
+    public BoardDto getboard(@RequestParam("bno") int bno){
+        return  boardService.getboard(bno);
+    }
+    //4. 게시물 삭제
+    @DeleteMapping("/delboard")
+    public boolean delboard(@RequestParam("bno") int bno){
+        return  boardService.delboard(bno);
+    }
+    //5. 게시물 수정
+    @PutMapping("/upboard")
+    public boolean upboard(@RequestBody BoardDto boardDto){
+        return boardService.upboard(boardDto);
     }
 
-    //3.게시물 개별 조회 처리
-    //@GetMapping("/getboard")
-    //4.게시물 수정 처리
-    //@PostMapping("/updateboard")
-    //5.게시물삭제처리
-    //@DeleteMapping("deleteboard")
+
 }

@@ -3,9 +3,11 @@ package com.Ezenweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 // 스프링 웹 기본설명 [ 1.MVC 2. 내장서버 3.RESTFUL 4.웹 설정 ]
 @SpringBootApplication  // 스프링 웹 위한 기본 설정 어노테이션
+@EnableJpaAuditing // JPA 감시 [생성, 변경 ]
 public class Webstart {
 
     public static void main(String[] args) {
