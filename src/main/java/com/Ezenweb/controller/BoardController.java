@@ -1,7 +1,9 @@
 package com.Ezenweb.controller;
 
 
+import com.Ezenweb.domain.dto.BcategoryDto;
 import com.Ezenweb.domain.dto.BoardDto;
+import com.Ezenweb.domain.entity.bcategory.BcategoryRepository;
 import com.Ezenweb.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -50,8 +52,8 @@ public class BoardController {
     }
     //2. 게시물 목록 조회 [ 페이징 검색]
     @GetMapping("/boardlist")
-    public List<BoardDto> getboardlist(){
-    return boardService.boardlist();
+    public List<BoardDto> getboardlist(@RequestParam("bcno")int bcno){
+        return boardService.boardlist(bcno);
     }
     //3. 게시물 개별 조회
     @GetMapping("/getboard")
@@ -70,4 +72,14 @@ public class BoardController {
     }
 
 
+    //6. 카테고리 등록
+    @PostMapping ("/setbcategory")
+    public  boolean setbcategory(@RequestBody BcategoryDto bcategoryDto){
+        return  boardService.setbcategory(bcategoryDto);
+    }
+    //7. 모든 카테고리 출력
+    @GetMapping("/bcategorylist")
+    public  List<BcategoryDto> bcategoryList(){
+        return  boardService.bcategorlist();
+    }
 }

@@ -19,6 +19,7 @@ public class BoardDto {
         private  int bcno;   // 카테고리 [카테고리fk]
         private  String memail; // 회원 아이디
 
+
         //1.형변환
         public BoardEntity toEntity() {
                 return BoardEntity.builder()

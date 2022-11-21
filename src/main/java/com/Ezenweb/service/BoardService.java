@@ -1,7 +1,10 @@
 package com.Ezenweb.service;
 
 
+import com.Ezenweb.domain.dto.BcategoryDto;
 import com.Ezenweb.domain.dto.BoardDto;
+import com.Ezenweb.domain.entity.bcategory.BcategoryEntity;
+import com.Ezenweb.domain.entity.bcategory.BcategoryRepository;
 import com.Ezenweb.domain.entity.board.BoardEntity;
 import com.Ezenweb.domain.entity.board.BoardRepository;
 import com.Ezenweb.domain.entity.member.MemberEntity;
@@ -14,6 +17,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @Service // 컴포넌트
 public class BoardService {
@@ -22,40 +26,47 @@ public class BoardService {
     private HttpServletRequest request; // 요청객체 선언
     @Autowired
     private MemberRepository memberRepository; // 회원 리포지토리 객체 선언
+    @Autowired
+    private MemberService memberService; //
     @Autowired //
     private BoardRepository boardRepository; // 게시물 리포지토리 객체 선언
             //@Transactional : 엔티티 DML 적용 할때 사용되는 어노테이션
             //1.메소드
+    @Autowired
+    private BcategoryRepository bcategoryRepository;
     //--------------------2.서비스-----------------//
     //1.게시물 쓰기
     @Transactional
     public boolean setboard(BoardDto boardDto){
 
-        // 로그인 정보 확인 [ 세션 = loginMno]
-        Object object= request.getSession().getAttribute("loginMno");
-        if(object==null){return false;}
-        //2.회원 정보 호출
-        int mno = (Integer)object;
-        //3. 회원번호 --> 회원정보호출
-        Optional<MemberEntity> optional = memberRepository.findById(mno);
+        MemberEntity memberEntity = memberService.getEntity();
+        if(memberEntity == null){return false;}
+
+        Optional<BcategoryEntity> optional = bcategoryRepository.findById(boardDto.getBcno());
         if(!optional.isPresent()){return false;}
-        //4.로그인된 회원의 엔티티
-        MemberEntity memberEntity = optional.get();
+        BcategoryEntity bcategoryEntity = optional.get();
 
       BoardEntity boardEntity = boardRepository.save(boardDto.toEntity());
         if( boardEntity.getBno() !=0) { //2. 생성된 entity 의 게시물번호가 0 이 아니면 성공
-            //5. ****!!!! 5.fk 대입 중요하다는뜻이지 않을까 별이  저렇게많은데
+           //1.회원 <---> 게시물 연관관게
             boardEntity.setMemberEntity(memberEntity);
-            // *** 양방향[pk필드에 fk연결]
             memberEntity.getBoardEntityList().add(boardEntity);
+            //2. 카테고리 <---> 게시물 연관관계 대입
+            boardEntity.setBcategoryEntity(bcategoryEntity);
+            bcategoryEntity.getBoardEntityList().add(boardEntity);
             return true;
         }
         else{return false;} // 2. 0이면 entity 생성 실패
     }
     //2.게시물 목록 조회
     @Transactional
-    public List<BoardDto> boardlist(){
-        List<BoardEntity> elist =  boardRepository.findAll(); //1. 모든 엔티티 호출한다
+    public List<BoardDto> boardlist(int bcno){
+        List<BoardEntity> elist = null;
+        if( bcno == 0){ elist = boardRepository.findAll(); }
+        else{// 카테고리번호가 0이 아니면 선택된 카테고리별 보기
+             BcategoryEntity bcEntity = bcategoryRepository.findById(bcno).get();
+            elist = bcEntity.getBoardEntityList(); // 해당 엔티티의 게시물목록
+        }
         List<BoardDto> dlist = new ArrayList<>(); //2. 컨트롤에게 전달할때 형변환[ entity -> dto ] : 이유 역할이 달라서
         for( BoardEntity entity : elist){// 3. 변환
             dlist.add(entity.toDto());
@@ -100,4 +111,32 @@ public class BoardService {
         } else{return   false;}
     }
 
+    //6.카테고리 등록
+    public boolean setbcategory(BcategoryDto bcategoryDto){
+        BcategoryEntity entity = bcategoryRepository.save(bcategoryDto.toEntity());
+        if(entity.getBcno() != 0){return  true;}
+        else{return false;}
+    }
+
+    //7.카테고리 출력
+    public  List<BcategoryDto> bcategorlist(){
+        List<BcategoryEntity> entityList= bcategoryRepository.findAll();
+        List<BcategoryDto> dtolist = new ArrayList<>();
+        entityList.forEach(e->dtolist.add(e.toDto()));
+        return dtolist;
+    }
 }
+ /*
+       //1. 리스트를 순회하는 방법3가지
+        for ( int i = 0 ; i< entityList.size(); i++){
+            BcategoryEntity e=  entityList.get(i);
+            System.out.println(e.toString());
+        }
+        for(BcategoryEntity e : entityList){
+            System.out.println(e.toString());
+        }
+        entityList.forEach(e->{e.toString(); });
+            // 화살표함수[람다식표현] js: (인수) =>{실행코드}  java:인수->{실행코드}
+        entityList.forEach(e -> dtolist.add(e.toDto()));
+        return dtolist;
+    */
