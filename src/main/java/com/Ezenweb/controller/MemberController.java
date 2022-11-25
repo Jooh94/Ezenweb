@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000") // 리액트와 연결하기 위한 리액트 포트번호
 @RestController // 해당 클래스가 RestController 임을 명시
 @RequestMapping("/member") // 공통 URL 메핑주소
 public class MemberController {

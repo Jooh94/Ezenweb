@@ -1,18 +1,43 @@
 alert('asd')
 
 let bcno = 2; // 카테고리번호 전역변수
+//// 1. 게시물 등록 메소드
+//function setboard(){
+//    let data = {
+//        btitle : document.querySelector('.btitle').value ,
+//        bcontent : document.querySelector('.bcontent').value,
+//        bfile : document.querySelector('.bfile').value ,
+//        bcno : bcno
+//    }
+//    $.ajax({
+//        url : "/board/setboard",
+//        type : "post",
+//        data : JSON.stringify(data) ,
+//        contentType : "application/json",
+//        success : function(re) {
+//            if( re == true){
+//                alert('글작성성공');
+//                location.href="/board/list";
+//            }
+//            else{ alert("글작성실패"); }
+//        }
+//    })
+//}
+
+//1.게시물 등록 메소드 //첨부파일이 있을경우 등록 메소드
 function setboard(){
-        let data={
-            btitle:document.querySelector('.btitle').value,
-            bcontent:document.querySelector('.bcontent').value,
-            bfile:document.querySelector('.bfile').value,
-            bcno: bcno
-        }
-    $.ajax({
+
+    let boardform = document.querySelector('.boardform')
+    let formdata = new FormData(boardform);
+    formdata.set("bcno",bcno) // 폼 데이터에 카테고리 정보 추가
+
+    $.ajax({ // http 사용하는 jquery(제이쿼리) 비동기통신 함수[기본값 contentType : text/html]
         url:"/board/setboard",
-        type:"post",
-        data:JSON.stringify(data),
-        contentType: 'application/json',
+        type:"post",                // Multipart 전송 방법1(첨부파일)
+        data:formdata,
+        //content-Type : multipart / formed-data<-- 파일첨부
+        contentType: false,         // Multipart 전송 방법2(첨부파일)
+        processData : false,        // Multipart 전송 방법3(첨부파일)
         success: function(re){
             if(re == true){
             alert('글작성성공');

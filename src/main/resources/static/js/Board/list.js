@@ -39,7 +39,7 @@ function bcategorylist(){
     url:"/board/bcategorylist",
     type:"get",
     success:function(re){
-        let html ='<button type="button" onclick="bcnochage(0)">전체보기</button>';;
+        let html ='<button type="button" onclick="bcnochage(0)">전체보기</button>';
         re.forEach(c =>{
             html +='<button type="button" onclick="bcnochage('+c.bcno+')">'+c.bcname+'</button>';
         })
