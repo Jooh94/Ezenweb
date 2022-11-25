@@ -1,7 +1,7 @@
 //1. react 라이브러리 호출
 import React from 'react';
 // 2. 컴포넌트 만들기 [함수만들기]
-function Clock(props){ // props : 속성 [매개변수
+function Clock(props){ // props : 속성 [매개변수]
 
     return(
         <div>
