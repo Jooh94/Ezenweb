@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cfd5cd9-5714-4550-8fb4-88f1c3a03da4" name="Changes" comment="11-21">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/domain/dto/BoardDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/domain/dto/BoardDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/Ezenweb/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/Ezenweb/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/Board/list.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Board/list.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/Board/write.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Board/write.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/board/write.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/board/write.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+    <list default="true" id="6cfd5cd9-5714-4550-8fb4-88f1c3a03da4" name="Changes" comment="11-25">
+      <change beforePath="$PROJECT_DIR$/src/main/frontend/src/chapter4/Clock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/frontend/src/chapter4/Clock.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +188,35 @@
       <option name="project" value="LOCAL" />
       <updated>1669021267252</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="11-25">
+      <created>1669344254112</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669344254112</updated>
+    </task>
+    <task id="LOCAL-00009" summary="11-25">
+      <created>1669344395622</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669344395622</updated>
+    </task>
+    <task id="LOCAL-00010" summary="11-25">
+      <created>1669344456426</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669344456426</updated>
+    </task>
+    <task id="LOCAL-00011" summary="11-25">
+      <created>1669344467467</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669344467467</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,7 +241,8 @@
     <MESSAGE value="11-16" />
     <MESSAGE value="11-18" />
     <MESSAGE value="11-21" />
-    <option name="LAST_COMMIT_MESSAGE" value="11-21" />
+    <MESSAGE value="11-25" />
+    <option name="LAST_COMMIT_MESSAGE" value="11-25" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
