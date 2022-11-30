@@ -33,11 +33,11 @@ public class MemberController {
        int result = memberService.setmember(memberDto);
         return  result;
     }
-    @PostMapping("/getmember") // 로그인 기능
-    public  int getmember(@RequestBody MemberDto memberDto){
-        int result = memberService.getmember(memberDto);
-        return  result;
-    }
+//    @PostMapping("/getmember") // 로그인 기능
+//    public  int getmember(@RequestBody MemberDto memberDto){
+//        int result = memberService.getmember(memberDto);
+//        return  result;
+//    }
     @GetMapping("/getpassword") //패스워드 찾기
     public  String getpassword(@RequestParam("memail") String memail){
         String result = memberService.getpassword(memail);
@@ -61,14 +61,14 @@ public class MemberController {
     }
 
     @GetMapping("/getloginMno") // 로그인 정보 확인
-    public  int getloginMno(){
-        int result = memberService.getloginMno();
+    public  String  getloginMno(){
+        String  result = memberService.getloginMno();
         return  result;
 
     }
 
-    @GetMapping("/getlogoutMno") //7.로그아웃
-    public  void getlogoutMno(){memberService.getlogoutMno();}
+//    @GetMapping("/logout") //7.로그아웃
+//    public  void getlogoutMno(){memberService.getlogoutMno();}
 
     @GetMapping("/list") //8 회원목록
     @ResponseBody
