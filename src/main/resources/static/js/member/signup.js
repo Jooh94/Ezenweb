@@ -1,25 +1,24 @@
-alert('dd')
-
+// 1. 회원가입 버튼
 function setmember(){
-    alert('setmember');
 
-    let info ={
-       memail : document.querySelector('.memail').value,
-       mpassword:document.querySelector('.mpassword').value,
-       mphone :document.querySelector('.mphone').value
-
+    let info = {
+        memail : document.querySelector('.memail').value ,
+        mpassword : document.querySelector('.mpassword').value ,
+        mphone : document.querySelector('.mphone').value
     }
-          let timerbox = document.querySelector('.timerbox').innerHTML
-          if(timerbox != "인증성공"){alert("이메일 인증부터 해주세요~"); return; }
+
+    let timerbox = document.querySelector('.timerbox').innerHTML
+    if( timerbox != "인증성공" ){ alert("이메일 인증부터 해주세요~"); return;  }
 
     $.ajax({
-        url: "/member/setmember",
-        type:"post",
-        data:JSON.stringify(info),
-        contentType:"application/json",
-        success: function(re){alert(re)}
+        url : "/member/setmember",
+        type : "POST",
+        data : JSON.stringify( info) ,
+        contentType : "application/json",
+        success : function(re) { alert(re) }
     })
 }
+
 
 //인증코드 요청
 let auth =1234; //발급된 인증코드 // 원래는 null 인데 지금 임시로 1234 넣은거임
@@ -81,3 +80,5 @@ function getauth(){
     }else{alert("인증코드 불일치")
     }
  }
+
+

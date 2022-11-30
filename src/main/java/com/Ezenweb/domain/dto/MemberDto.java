@@ -2,6 +2,11 @@ package com.Ezenweb.domain.dto;
 
 import com.Ezenweb.domain.entity.member.MemberEntity;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Set;
 
 @NoArgsConstructor // 빈생성자 주입
 @AllArgsConstructor //풀 생성자 주입
@@ -11,13 +16,15 @@ import lombok.*;
 
 
 
-public class MemberDto {
+public class MemberDto implements UserDetails {
 
     private  int mno;
     private  String memail;
     private  String mpassword;
     private  String mphone;
     //* dto --> entity 변환
+
+    private Set<GrantedAuthority> authorities; //인증 권한 토큰
     public MemberEntity toEntity(){
         return MemberEntity.builder()
                 .mno(this.mno)
@@ -27,4 +34,41 @@ public class MemberDto {
                 .build();
     }
 
+    public void setAuthorities(Set<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
+    @Override
+    public String getPassword() {
+        return mpassword;
+    }
+
+    @Override
+    public String getUsername() {
+        return memail;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
