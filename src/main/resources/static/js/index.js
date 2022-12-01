@@ -6,6 +6,7 @@ function getloginMno(){
         url : "/member/getloginMno" ,
         type : "get" ,
         success : function(re) {
+            alert(re);
             let headerbox = '';
             if( re == "" ){ // 로그인 안했다 ..
 

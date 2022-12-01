@@ -2,6 +2,7 @@ package com.Ezenweb.service;
 
 
 import com.Ezenweb.domain.dto.MemberDto;
+import com.Ezenweb.domain.dto.OauthDto;
 import com.Ezenweb.domain.entity.member.MemberEntity;
 import com.Ezenweb.domain.entity.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
@@ -23,7 +29,51 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 @Service // 해당 클래스가 Service 임을 명시
-public class MemberService implements UserDetailsService {
+public class MemberService
+        implements UserDetailsService,
+        OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+
+    //UserDetailsService : 일반회원
+    //OAuth2UserService<OAuth2UserRequest, OAuth2User> : 소셜회원 --> OAuth2User 메소드구현
+
+
+    @Override // 로그인 성공한 소셜 회원 정보 받는 메소드
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+            System.out.println("1. userRequest:"+userRequest.toString());
+        //1. 인증[로그인] 결과 정보 요청
+        OAuth2UserService oAuth2UserService = new DefaultOAuth2UserService();
+        OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
+            System.out.println("2.oauth2User:"+ oAuth2User.toString());
+        //2. oauth2 클라이언트 식별 [ 카카오 vs 네이버 vs 구글 ]
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+            System.out.println("3.oauth2 회사명"+registrationId);
+
+        //3. 회원정보 담는 객체[ JSON 형태 ]
+        String oauth2UserInfo = userRequest
+                .getClientRegistration()
+                .getProviderDetails()
+                .getUserInfoEndpoint()
+                .getUserNameAttributeName();
+            System.out.println("회원정보 담긴 객체명 :"+oauth2UserInfo);
+            System.out.println("인증결과:"+oAuth2User.getAuthorities());
+        //4.Dto 처리
+        OauthDto oauthDto = OauthDto.of(registrationId,oauth2UserInfo,oAuth2User.getAttributes());
+        //*. DB 처리
+
+        //권한
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority("kakaoUser"));
+
+        //5. 반환 MemberDto[일반회원 vs oauth : 통합회원 - loginDto]
+        MemberDto memberDto = new MemberDto();
+            memberDto.setMemail(oauthDto.getMemail());
+            memberDto.setAuthorities(authorities);
+            memberDto.setAttributes(oauthDto.getAttributes());
+
+        System.out.println(memberDto.toString());
+
+            return memberDto;
+    }
 
     //////////////////////전역 객체/////////////////////////////////////////
     @Autowired
@@ -189,7 +239,7 @@ public class MemberService implements UserDetailsService {
             return null;
         }else{ // anonymousUser 아니면 로그인후
             MemberDto memberDto = (MemberDto) principal;
-            return memberDto.getMemail();
+            return memberDto.getMemail()+"_"+memberDto.getAuthorities();
         }
     }
 

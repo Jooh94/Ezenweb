@@ -4,8 +4,10 @@ import com.Ezenweb.domain.entity.member.MemberEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 
 @NoArgsConstructor // 빈생성자 주입
@@ -16,7 +18,16 @@ import java.util.Set;
 
 
 
-public class MemberDto implements UserDetails {
+public class MemberDto implements UserDetails , OAuth2User {
+    @Override
+    public String getName() {
+        return this.memail;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return this.attributes;
+    }
 
     private  int mno;
     private  String memail;
@@ -25,6 +36,8 @@ public class MemberDto implements UserDetails {
     //* dto --> entity 변환
 
     private Set<GrantedAuthority> authorities; //인증 권한 토큰
+    private  Map<String, Object> attributes; //결과 인증결과
+
     public MemberEntity toEntity(){
         return MemberEntity.builder()
                 .mno(this.mno)
