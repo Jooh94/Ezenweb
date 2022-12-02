@@ -41,7 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .ignoringAntMatchers("/member/getmember") // 로그인 post 사용  // 해당 URL 요청 방지 해지
                         .ignoringAntMatchers("/member/setmember") // 회원가입 post 사용
                 .and() // 기능구분
-                     .oauth2Login() // 소셜 로그인 보안 설정
+                          .oauth2Login() // 소셜 로그인 보안 설정
+                          .defaultSuccessUrl("/")// 소셜 로그인 성공시 이동하는 URL
                           .userInfoEndpoint() // Endpoint : 소셜 회원정보를 받는곳
                           .userService(memberService) ;// 해당서비스 loadUser 메소드 구현
 

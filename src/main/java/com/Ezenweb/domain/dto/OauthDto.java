@@ -1,5 +1,6 @@
 package com.Ezenweb.domain.dto;
 
+import com.Ezenweb.domain.entity.member.MemberEntity;
 import lombok.*;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -74,6 +75,12 @@ public class OauthDto {
 
 
     //4. dto - ToEntity
+    public MemberEntity toEntity(){
+        return MemberEntity.builder()
+                .memail(this.memail)
+                .mrol(this.registrationId)
+                .build();
+    }
 
 
 }
