@@ -13,13 +13,17 @@
 //1.
 import React from 'react';
 import Header from './Header';
+import Home from './Home';
 import Footer from './Footer';
 import Signup from './member/Signup';
+import Login from './member/Login';
+import BoardList from './board/BoardList';
+
                          // i : install 약자임
 // 라우터 설치 [ 터미널 ] :npm i react-router-dom
 //import { 컴포넌트명 } from "react-router-dom";
 import { HashRouter,BrowserRouter,Routes,Route, Link ,Router} from "react-router-dom";
-    // BrowerRoter :
+    // BrowerRoter : 가상 URL
     // vs HashRouter :
     // Routes : Route 목록 / 리스트
     // Route :  가상 URL 만들기 --> 해당 URL 에 따른 컴포넌트 렌더링 [SPA]
@@ -28,12 +32,14 @@ import { HashRouter,BrowserRouter,Routes,Route, Link ,Router} from "react-router
     // Router :
 export default function Index(props){
     return(
-       <div>
+       <div className="webbox">
             <BrowserRouter>
                 <Header/>
                     <Routes>
-                        <Route path="/" />
+                        <Route path="/" element = { <Home/> } />
                         <Route path="/member/signup" element={ <Signup/> } />
+                        <Route path="/member/login" element={ <Login/> } />
+                        <Route path="/board/list" element={ <BoardList/> } />
                     </Routes>
                 <Footer/>
             </BrowserRouter>

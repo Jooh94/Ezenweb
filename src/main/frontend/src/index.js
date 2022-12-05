@@ -5,11 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import Index from './component/Index'
+
 // 1. 사용할 컴포넌트 호출 [ import 컴포넌트명 from 파일명 ]
-import Signup from './component/member/Signup'
+
+import NotificationList from './Book/chapter6/NotificationList' //6장
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // 2. Dom 컨테이너 [ public-> index.html 안에 있는 태그 ]
-const root = ReactDOM.createRoot(document.getElementById('root'));
+//* 프로젝트
             root.render(
               <React.StrictMode>
                 <Index />
@@ -50,8 +54,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //              </React.StrictMode>
 //            );
 
-
-
+//6.
+//root.render(
+//  <React.StrictMode>
+//    <NotificationList />
+//  </React.StrictMode>
+//);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

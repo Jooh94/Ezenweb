@@ -33,29 +33,29 @@ public class BoardController {
 
     //----------------2.페이지 로드[html] [view]-----------------------//
 
-    //1. 게시물페이지 열기
-    @GetMapping("/list")
-    public Resource getlist() {
-        return new ClassPathResource("templates/board/list.html");
-    }
-
-    //2. 게시물쓰기 페이지열기
-    @GetMapping("/write")
-    public Resource getwrite() {
-        return new ClassPathResource("templates/board/write.html");
-    }
-
-    //3. 게시물ㅈ회 페이지 열기
-    @GetMapping("/view")
-    public Resource getview() {
-        return new ClassPathResource("templates/board/view.html");
-    }
-
-    //4. 게시물수정 페이지 열기
-    @GetMapping("/update")
-    public Resource getupdate() {
-        return new ClassPathResource("templates/board/update.html");
-    }
+//    //1. 게시물페이지 열기
+//    @GetMapping("/list")
+//    public Resource getlist() {
+//        return new ClassPathResource("templates/board/list.html");
+//    }
+//
+//    //2. 게시물쓰기 페이지열기
+//    @GetMapping("/write")
+//    public Resource getwrite() {
+//        return new ClassPathResource("templates/board/write.html");
+//    }
+//
+//    //3. 게시물ㅈ회 페이지 열기
+//    @GetMapping("/view")
+//    public Resource getview() {
+//        return new ClassPathResource("templates/board/view.html");
+//    }
+//
+//    //4. 게시물수정 페이지 열기
+//    @GetMapping("/update")
+//    public Resource getupdate() {
+//        return new ClassPathResource("templates/board/update.html");
+//    }
 
 
 

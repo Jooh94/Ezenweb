@@ -9,23 +9,24 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000") // 리액트와 연결하기 위한 리액트 포트번호
+//@CrossOrigin(origins = "http://localhost:3000") // 리액트와 연결하기 위한 리액트 포트번호
 @RestController // 해당 클래스가 RestController 임을 명시
 @RequestMapping("/member") // 공통 URL 메핑주소
 public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("/signup")
-    public Resource getsignup(){return  new ClassPathResource("templates/member/signup.html");}
-    @GetMapping("/login")
-    public Resource getlogin(){return  new ClassPathResource("templates/member/login.html");}
-    @GetMapping("/findpassword")
-    public  Resource findpassword(){return  new ClassPathResource("templates/member/findpassword.html");}
-    @GetMapping("/delete")
-    public Resource getdelete(){return  new ClassPathResource("templates/member/delete.html");}
-    @GetMapping("/update")
-    public Resource update(){return  new ClassPathResource("templates/member/update.html");}
+    //---------------HTML 반환 매핑------------------------------------------------------------//
+//    @GetMapping("/signup")
+//    public Resource getsignup(){return  new ClassPathResource("templates/member/signup.html");}
+//    @GetMapping("/login")
+//    public Resource getlogin(){return  new ClassPathResource("templates/member/login.html");}
+//    @GetMapping("/findpassword")
+//    public  Resource findpassword(){return  new ClassPathResource("templates/member/findpassword.html");}
+//    @GetMapping("/delete")
+//    public Resource getdelete(){return  new ClassPathResource("templates/member/delete.html");}
+//    @GetMapping("/update")
+//    public Resource update(){return  new ClassPathResource("templates/member/update.html");}
 
     //----------------------------------서비스/기능매핑---------------------------//
     @PostMapping("/setmember") // 회원가입 기능

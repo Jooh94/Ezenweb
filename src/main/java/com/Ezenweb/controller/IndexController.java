@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-    @GetMapping("/") //http://localhost:8080 -> 도메인[문자주소]구매시 www.ezenweb.com
-    public Resource getindex(){
-        return new ClassPathResource("templates/index.html");
-    }
+    // 리액트 사용
+//    @GetMapping("/") //http://localhost:8080 -> 도메인[문자주소]구매시 www.ezenweb.com
+//    public Resource getindex(){
+//        return new ClassPathResource("templates/index.html");
+//    }
 
 }
