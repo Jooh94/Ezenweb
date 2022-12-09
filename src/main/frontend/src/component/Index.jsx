@@ -18,6 +18,21 @@ import Footer from './Footer';
 import Signup from './member/Signup';
 import Login from './member/Login';
 import BoardList from './board/BoardList';
+import BoardWrite from './board/BoardWrite';
+import BookList from '../Book/BookList';
+
+import Library from '../Book/chapter3/Library' // 3장
+import Clock from '../Book/chapter4/Clock' // 4장
+import CommentList from '../Book/chapter5/CommentList' // 5장
+import NotificationList from '../Book/chapter6/NotificationList' // 6장
+import Counter from '../Book/chapter7/Ex1_Hook' // 7장
+import Accommodate from '../Book/chapter7/Accommodate' // 7장
+import ConfirmButton from '../Book/chapter8/ConfirmButton' // 8장
+import ConfirmButton2 from '../Book/chapter8/ConfirmButton2' // 8장
+import TestState from '../Book/chapter8/TestState' // 8장
+import LandingPage from '../Book/chapter9/LandingPage' // 8장
+import AttendanceBook from '../Book/chapter10/AttendanceBook' // 10장
+import SignUp from '../Book/chapter11/SignUp' // 11장
 
                          // i : install 약자임
 // 라우터 설치 [ 터미널 ] :npm i react-router-dom
@@ -40,6 +55,21 @@ export default function Index(props){
                         <Route path="/member/signup" element={ <Signup/> } />
                         <Route path="/member/login" element={ <Login/> } />
                         <Route path="/board/list" element={ <BoardList/> } />
+                        <Route path="/board/write" element={ <BoardWrite/> } />
+
+                        <Route path="/book/bookList" element={ <BookList/> } />
+
+                        <Route path="/book/library" element={ <Library/> } />
+                        <Route path="/book/clock" element={ <Clock/> } />
+                        <Route path="/book/commentList" element={ <CommentList/> } />
+                        <Route path="/book/notificationList" element={ <NotificationList/> } />
+                        <Route path="/book/accommodate" element={ <Accommodate/> } />
+                        <Route path="/book/confirmButton" element={ <ConfirmButton/> } />
+                        <Route path="/book/landingPage" element={ <LandingPage/> } />
+                        <Route path="/book/attendanceBook" element={ <AttendanceBook/> } />
+                        <Route path="/book/signUp" element={ <SignUp/> } />
+
+
                     </Routes>
                 <Footer/>
             </BrowserRouter>

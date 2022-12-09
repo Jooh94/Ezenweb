@@ -8,7 +8,17 @@ import Index from './component/Index'
 
 // 1. 사용할 컴포넌트 호출 [ import 컴포넌트명 from 파일명 ]
 
-import NotificationList from './Book/chapter6/NotificationList' //6장
+import Library from './Book/chapter3/Library' // 3장
+import Clock from './Book/chapter4/Clock' // 4장
+import CommentList from './Book/chapter5/CommentList' // 5장
+import NotificationList from './Book/chapter6/NotificationList' // 6장
+import Counter from './Book/chapter7/Ex1_Hook' // 7장
+import Accommodate from './Book/chapter7/Accommodate' // 7장
+import ConfirmButton from './Book/chapter8/ConfirmButton' // 8장
+import ConfirmButton2 from './Book/chapter8/ConfirmButton2' // 8장
+import TestState from './Book/chapter8/TestState' // 8장
+import LandingPage from './Book/chapter9/LandingPage' // 8장
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -19,7 +29,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
                 <Index />
               </React.StrictMode>
             );
-
 
 
 // 3. Dom 컨테이너 렌더링
@@ -48,18 +57,67 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //      } , 1000 );
 
 // 4.
-//            root.render(
-//              <React.StrictMode>
-//                <Signup />
-//              </React.StrictMode>
-//            );
+//root.render(
+//  <React.StrictMode>
+//    <CommentList />
+//  </React.StrictMode>
+//);
 
-//6.
+// 5.
+//root.render(
+//  <React.StrictMode>
+//    <Signup />
+//  </React.StrictMode>
+//);
+
+// 6.
 //root.render(
 //  <React.StrictMode>
 //    <NotificationList />
 //  </React.StrictMode>
 //);
+
+//// 7. ex1
+//root.render(
+//  <React.StrictMode>
+//    <Counter />
+//  </React.StrictMode>
+//);
+
+// 7. 실습
+//root.render(
+//  <React.StrictMode>
+//    <Accommodate />
+//  </React.StrictMode>
+//);
+
+// 8. 실습
+//root.render(
+//  <React.StrictMode>
+//    <ConfirmButton />
+//  </React.StrictMode>
+//);
+
+// 8. 실습
+//root.render(
+//  <React.StrictMode>
+//    <ConfirmButton2 />
+//  </React.StrictMode>
+//);
+// 8. 실습2
+//root.render(
+//  <React.StrictMode>
+//    <TestState />
+//  </React.StrictMode>
+//);
+
+// 9. 실습
+//root.render(
+//  <React.StrictMode>
+//    <LandingPage />
+//  </React.StrictMode>
+//);
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

@@ -32,10 +32,8 @@ import java.util.*;
 public class MemberService
         implements UserDetailsService,
         OAuth2UserService<OAuth2UserRequest, OAuth2User> {
-
     //UserDetailsService : 일반회원
     //OAuth2UserService<OAuth2UserRequest, OAuth2User> : 소셜회원 --> OAuth2User 메소드구현
-
 
     @Override // 로그인 성공한 소셜 회원 정보 받는 메소드
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -100,12 +98,17 @@ public class MemberService
     //로그인된 엔티티호출
     public MemberEntity getEntity(){
         // 로그인 정보 확인 [ 세션 = loginMno]
-        Object object= request.getSession().getAttribute("loginMno");
+        //Object object= request.getSession().getAttribute("loginMno");
+
+        Object object= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         if(object==null){return null;}
-        //2.회원 정보 호출
-        int mno = (Integer)object;
+        //2.로그인된 회원정보
+        //int mno = (Integer)object;
+        MemberDto memberDto = (MemberDto) object;
         //3. 회원번호 --> 회원정보호출
-        Optional<MemberEntity> optional = memberRepository.findById(mno);
+        //Optional<MemberEntity> optional = memberRepository.findById(mno);
+        Optional<MemberEntity> optional = memberRepository.findByMemail(memberDto.getMemail());
         if(!optional.isPresent()){return null;}
         //4.로그인된 회원의 엔티티
         return  optional.get();
